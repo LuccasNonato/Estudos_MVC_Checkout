@@ -1,0 +1,58 @@
+unit View.Vendas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxSkinsCore, dxSkinsDefaultPainters,
+  Vcl.ExtCtrls, dxBar, cxClasses, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxStyles, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, cxNavigator, dxDateRanges, Data.DB, cxDBData,
+  dxCustomTileControl, dxTileControl, cxGridLevel, cxGridCustomView,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
+  Data.FMTBcd, Data.SqlExpr, Datasnap.Provider, datamodule.conexao;
+
+type
+  TFrmViewVendas = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    dxTileControl1: TdxTileControl;
+    dxTileControl1Group1: TdxTileControlGroup;
+    dxTileControl1Item2: TdxTileControlItem;
+    dxTileControl1Item1: TdxTileControlItem;
+    dxTileControl1Item3: TdxTileControlItem;
+    dxTileControl1Item4: TdxTileControlItem;
+    SQLQuery1: TSQLQuery;
+    DataSetProvider1: TDataSetProvider;
+    DataSource1: TDataSource;
+    SQLDataSet1: TSQLDataSet;
+    SQLDataSet1CODIGO_PRODUTO: TIntegerField;
+    SQLDataSet1NOME_PRODUTO: TStringField;
+    SQLDataSet1DESCRICAO_PRODUTO: TStringField;
+    SQLDataSet1PRECO_PRODUTO: TFMTBCDField;
+    SQLQuery1CODIGO_PRODUTO: TIntegerField;
+    SQLQuery1NOME_PRODUTO: TStringField;
+    SQLQuery1DESCRICAO_PRODUTO: TStringField;
+    SQLQuery1PRECO_PRODUTO: TFMTBCDField;
+    cxGrid1DBTableView1CODIGO_PRODUTO: TcxGridDBColumn;
+    cxGrid1DBTableView1NOME_PRODUTO: TcxGridDBColumn;
+    cxGrid1DBTableView1DESCRICAO_PRODUTO: TcxGridDBColumn;
+    cxGrid1DBTableView1PRECO_PRODUTO: TcxGridDBColumn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmViewVendas: TFrmViewVendas;
+
+implementation
+
+{$R *.dfm}
+
+end.

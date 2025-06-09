@@ -1,0 +1,534 @@
+object FrmViewVendas: TFrmViewVendas
+  Left = 0
+  Top = 0
+  Caption = 'Vender'
+  ClientHeight = 551
+  ClientWidth = 1195
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1195
+    Height = 323
+    Align = alClient
+    TabOrder = 0
+    object Panel3: TPanel
+      Left = 909
+      Top = 1
+      Width = 285
+      Height = 321
+      Align = alRight
+      TabOrder = 0
+      object cxLabel1: TcxLabel
+        Left = 72
+        Top = 234
+        Caption = 'Valor Total'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -16
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.HotTrack = False
+        Style.IsFontAssigned = True
+      end
+      object cxCodProduto: TcxButtonEdit
+        Left = 0
+        Top = 22
+        Properties.Buttons = <
+          item
+            Caption = 'F2'
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.ClickKey = 113
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.Color = clGradientActiveCaption
+        Style.HotTrack = False
+        Style.ButtonStyle = bts3D
+        TabOrder = 1
+        Width = 262
+      end
+      object cxTextEdit2: TcxTextEdit
+        Left = 0
+        Top = 44
+        Style.BorderColor = clHighlight
+        Style.BorderStyle = ebs3D
+        Style.Color = clGradientActiveCaption
+        Style.HotTrack = False
+        TabOrder = 2
+        Width = 262
+      end
+      object cxTextEdit3: TcxTextEdit
+        Left = 0
+        Top = 66
+        Style.BorderColor = clHighlight
+        Style.BorderStyle = ebs3D
+        Style.Color = clGradientActiveCaption
+        Style.HotTrack = False
+        TabOrder = 3
+        Width = 262
+      end
+      object dxLayoutControl1: TdxLayoutControl
+        Left = 1
+        Top = 1
+        Width = 283
+        Height = 319
+        Align = alClient
+        TabOrder = 4
+        ExplicitLeft = 0
+        ExplicitWidth = 263
+        object Panel6: TPanel
+          Left = 10
+          Top = 268
+          Width = 262
+          Height = 41
+          Caption = '12,20'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 4
+        end
+        object cxLabel2: TcxLabel
+          Left = 94
+          Top = 239
+          Caption = 'Valor Total'
+          FocusControl = Panel6
+          ParentColor = False
+          ParentFont = False
+          Style.Color = clSkyBlue
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -16
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = [fsBold]
+          Style.HotTrack = False
+          Style.IsFontAssigned = True
+        end
+        object cxTextEdit1: TcxTextEdit
+          Left = 10
+          Top = 130
+          ParentFont = False
+          Style.BorderColor = clWindowFrame
+          Style.BorderStyle = ebs3D
+          Style.Color = clGradientActiveCaption
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -16
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = [fsBold]
+          Style.HotTrack = False
+          Style.IsFontAssigned = True
+          TabOrder = 3
+          Width = 263
+        end
+        object cxTextEdit4: TcxTextEdit
+          Left = 10
+          Top = 79
+          ParentFont = False
+          Style.BorderColor = clWindowFrame
+          Style.BorderStyle = ebs3D
+          Style.Color = clGradientActiveCaption
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -16
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = [fsBold]
+          Style.HotTrack = False
+          Style.IsFontAssigned = True
+          TabOrder = 2
+          Width = 263
+        end
+        object cxButtonEdit1: TcxButtonEdit
+          Left = 10
+          Top = 28
+          ParentFont = False
+          Properties.Buttons = <
+            item
+              Caption = 'F2'
+              Default = True
+              Kind = bkEllipsis
+            end>
+          Properties.ClickKey = 113
+          Style.BorderColor = clWindowFrame
+          Style.BorderStyle = ebs3D
+          Style.Color = clGradientActiveCaption
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -16
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = [fsBold]
+          Style.HotTrack = False
+          Style.ButtonStyle = bts3D
+          Style.IsFontAssigned = True
+          TabOrder = 1
+          Width = 263
+        end
+        object dxLayoutControl1Group_Root: TdxLayoutGroup
+          AlignHorz = ahParentManaged
+          AlignVert = avParentManaged
+          AllowFloating = True
+          AllowQuickCustomize = True
+          AllowRemove = False
+          ButtonOptions.Buttons = <>
+          Hidden = True
+          Locked = True
+          ShowBorder = False
+          Index = -1
+        end
+        object dxLayoutItem1: TdxLayoutItem
+          Parent = dxLayoutControl1Group_Root
+          AlignHorz = ahCenter
+          AlignVert = avBottom
+          CaptionOptions.Visible = False
+          Control = Panel6
+          ControlOptions.AutoColor = True
+          ControlOptions.OriginalHeight = 41
+          ControlOptions.OriginalWidth = 262
+          ControlOptions.ShowBorder = False
+          Index = 4
+        end
+        object dxLayoutItem2: TdxLayoutItem
+          Parent = dxLayoutControl1Group_Root
+          AlignHorz = ahCenter
+          AlignVert = avBottom
+          CaptionOptions.AlignHorz = taCenter
+          CaptionOptions.Visible = False
+          Control = cxLabel2
+          ControlOptions.OriginalHeight = 23
+          ControlOptions.OriginalWidth = 95
+          ControlOptions.ShowBorder = False
+          Index = 0
+        end
+        object dxLayoutItem3: TdxLayoutItem
+          Parent = dxLayoutControl1Group_Root
+          CaptionOptions.AlignHorz = taCenter
+          CaptionOptions.Text = 'Valor Unitario'
+          CaptionOptions.Layout = clTop
+          Control = cxTextEdit1
+          ControlOptions.OriginalHeight = 27
+          ControlOptions.OriginalWidth = 121
+          ControlOptions.ShowBorder = False
+          Index = 3
+        end
+        object dxLayoutItem4: TdxLayoutItem
+          Parent = dxLayoutControl1Group_Root
+          CaptionOptions.AlignHorz = taCenter
+          CaptionOptions.Text = 'Quantidade'
+          CaptionOptions.Layout = clTop
+          Control = cxTextEdit4
+          ControlOptions.OriginalHeight = 27
+          ControlOptions.OriginalWidth = 121
+          ControlOptions.ShowBorder = False
+          Index = 2
+        end
+        object dxLayoutItem5: TdxLayoutItem
+          Parent = dxLayoutControl1Group_Root
+          CaptionOptions.AlignHorz = taCenter
+          CaptionOptions.Text = 'Codigo'
+          CaptionOptions.Layout = clTop
+          Control = cxButtonEdit1
+          ControlOptions.OriginalHeight = 27
+          ControlOptions.OriginalWidth = 121
+          ControlOptions.ShowBorder = False
+          Index = 1
+        end
+      end
+    end
+    object cxGrid1: TcxGrid
+      Left = 1
+      Top = 1
+      Width = 908
+      Height = 321
+      Align = alClient
+      TabOrder = 1
+      ExplicitWidth = 923
+      object cxGrid1DBTableView1: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        FilterBox.CustomizeDialog = False
+        DataController.DataSource = DataSource1
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsCustomize.ColumnFiltering = False
+        OptionsCustomize.ColumnGrouping = False
+        OptionsCustomize.ColumnHidingOnGrouping = False
+        OptionsCustomize.ColumnHorzSizing = False
+        OptionsCustomize.ColumnMoving = False
+        OptionsCustomize.ColumnSorting = False
+        OptionsCustomize.ColumnsQuickCustomizationReordering = qcrEnabled
+        OptionsCustomize.ColumnsQuickCustomizationShowCommands = False
+        OptionsSelection.CellSelect = False
+        OptionsView.Footer = True
+        OptionsView.FooterMultiSummaries = True
+        OptionsView.GroupByBox = False
+        OptionsView.GroupFooterMultiSummaries = True
+        object cxGrid1DBTableView1CODIGO_PRODUTO: TcxGridDBColumn
+          DataBinding.FieldName = 'CODIGO_PRODUTO'
+        end
+        object cxGrid1DBTableView1NOME_PRODUTO: TcxGridDBColumn
+          DataBinding.FieldName = 'NOME_PRODUTO'
+          Width = 200
+        end
+        object cxGrid1DBTableView1DESCRICAO_PRODUTO: TcxGridDBColumn
+          DataBinding.FieldName = 'DESCRICAO_PRODUTO'
+          Width = 200
+        end
+        object cxGrid1DBTableView1PRECO_PRODUTO: TcxGridDBColumn
+          DataBinding.FieldName = 'PRECO_PRODUTO'
+        end
+      end
+      object cxGrid1Level1: TcxGridLevel
+        GridView = cxGrid1DBTableView1
+      end
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 323
+    Width = 1195
+    Height = 228
+    Align = alBottom
+    TabOrder = 1
+    ExplicitWidth = 929
+    object dxTileControl1: TdxTileControl
+      Left = 1
+      Top = 1
+      Width = 1193
+      Height = 226
+      TabOrder = 0
+      ExplicitLeft = -5
+      ExplicitTop = 5
+      ExplicitWidth = 681
+      object dxTileControl1Group1: TdxTileControlGroup
+        Index = 0
+      end
+      object dxTileControl1Item2: TdxTileControlItem
+        GroupIndex = 0
+        IndexInGroup = 0
+        Text1.AssignedValues = []
+        Text2.AssignedValues = []
+        Text3.AssignedValues = []
+        Text4.AssignedValues = []
+      end
+      object dxTileControl1Item1: TdxTileControlItem
+        GroupIndex = 0
+        IndexInGroup = 1
+        Text1.AssignedValues = []
+        Text2.AssignedValues = []
+        Text3.AssignedValues = []
+        Text4.AssignedValues = []
+      end
+      object dxTileControl1Item3: TdxTileControlItem
+        GroupIndex = 0
+        IndexInGroup = 2
+        Text1.AssignedValues = []
+        Text2.AssignedValues = []
+        Text3.AssignedValues = []
+        Text4.AssignedValues = []
+      end
+      object dxTileControl1Item4: TdxTileControlItem
+        GroupIndex = 0
+        IndexInGroup = 3
+        Text1.AssignedValues = []
+        Text2.AssignedValues = []
+        Text3.AssignedValues = []
+        Text4.AssignedValues = []
+      end
+    end
+    object PanelSelecionaProduto: TPanel
+      Left = 1
+      Top = 1
+      Width = 1193
+      Height = 226
+      Align = alClient
+      TabOrder = 1
+      Visible = False
+      ExplicitLeft = 664
+      ExplicitTop = 128
+      ExplicitWidth = 185
+      ExplicitHeight = 41
+      object cxGrid2: TcxGrid
+        Left = 1
+        Top = 1
+        Width = 907
+        Height = 224
+        Align = alLeft
+        TabOrder = 0
+        object cxGridDBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          FilterBox.CustomizeDialog = False
+          DataController.DataSource = DataSource1
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsCustomize.ColumnFiltering = False
+          OptionsCustomize.ColumnGrouping = False
+          OptionsCustomize.ColumnHidingOnGrouping = False
+          OptionsCustomize.ColumnHorzSizing = False
+          OptionsCustomize.ColumnMoving = False
+          OptionsCustomize.ColumnSorting = False
+          OptionsCustomize.ColumnsQuickCustomizationReordering = qcrEnabled
+          OptionsCustomize.ColumnsQuickCustomizationShowCommands = False
+          OptionsSelection.CellSelect = False
+          OptionsView.Footer = True
+          OptionsView.FooterMultiSummaries = True
+          OptionsView.GroupByBox = False
+          OptionsView.GroupFooterMultiSummaries = True
+          object cxGridDBColumn1: TcxGridDBColumn
+            Caption = 'Codigo'
+            DataBinding.FieldName = 'CODIGO_PRODUTO'
+            HeaderAlignmentHorz = taCenter
+            Width = 100
+          end
+          object cxGridDBColumn2: TcxGridDBColumn
+            Caption = 'Nome'
+            DataBinding.FieldName = 'NOME_PRODUTO'
+            HeaderAlignmentHorz = taCenter
+            Width = 315
+          end
+          object cxGridDBColumn3: TcxGridDBColumn
+            Caption = 'Descricao'
+            DataBinding.FieldName = 'DESCRICAO_PRODUTO'
+            HeaderAlignmentHorz = taCenter
+            Width = 315
+          end
+          object cxGridDBColumn4: TcxGridDBColumn
+            Caption = 'Valor'
+            DataBinding.FieldName = 'PRECO_PRODUTO'
+            HeaderAlignmentHorz = taCenter
+          end
+        end
+        object cxGridLevel1: TcxGridLevel
+          GridView = cxGridDBTableView1
+        end
+      end
+      object cxButton1: TcxButton
+        Left = 1003
+        Top = 80
+        Width = 98
+        Height = 81
+        OptionsImage.Glyph.SourceDPI = 96
+        OptionsImage.Glyph.Data = {
+          89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+          F4000000097048597300000B1200000B1201D2DD7EFC0000001F744558745469
+          746C65005069766F745461626C6547726F757053656C656374696F6E3B648625
+          7F000003E749444154785EED976D685B5518C7FFE72669B2DAA9DDDA323F08DD
+          2AC56F43948ACC29C8143615AA30996FFB26E8061304E7D0CE8D29E82741F083
+          F886A9AED54DE6DB87393F089B15B5EDC46EB44DD276CDFA963469FA9234B949
+          73EE793C3BDC7BC3C1044947F5833DF0E7B997DC87E7F73FF779EEBD614484FF
+          721952FF6F807500AF1DC1182B9BD0D1D95F36F1CDFD77191DC1BE2F72CB8B87
+          6A37D6C70154BAAE220011C1B82E78C6F6D6D6DD7C89AF14F649206541A9FA1D
+          A8AC379EBDB38233788880DD3B6F6B8C8CCF751F0DF63DB19C5E38F0CEC15D71
+          FDBAB5EB014644F0077C68DED6847BEEB8F5B1A6C6C6A1573EFCE54926D7BFD2
+          8496254004C4B31C3CE0C7BD6DCDF5ADDBB6741DF9E8B73387DE3DB765CD0138
+          171004084148E72D4C672DB4B4346167DBD6F64D9B1A865F7CEFFC53FFD412EE
+          A3B823D8DF03C67600A45C11B95149085BEAD8FE4DC6A7DBB72392CA3BB304C6
+          809B021ED4FB0D5C0ECF627038F66DC1CCBCF0F1AB8FC6CA4D4109A0B39F1E79
+          E076FB1785611FDAE7A4A56A2E4249F36FA3ECF330DC52E7432693474F6F349D
+          4A2D1E0CBEB6FBA44A2E01B85360BB2284E7F22A820061C389D28E00E4A06950
+          3600DC6BF20032D9156CAEF5E2A1FB5B6F1C188E7FF6CC891FF715CCA5E74EBF
+          B5D7D90D0D40CA6E2CFD1668005A2C0341445A6ED6E448780B68DDBA194D0D75
+          0FF7FE311179FCC83707CEBCDDFE390072018A454B39E616E9C59D63E1829483
+          52F0809D2B4AB9C222A42D81E4BC89E6860D7870474B5DD7D7E920806E29AE01
+          48F7AAB31D00E1147301F4826E114132F75A142A2A58126EB33210023E0343E3
+          F3484DA7E667C643CF3B13E802E40B5C25704B256A00FA39DC6990C0522A4228
+          00155D28C858230BFB1843742481C92B574F872F7C72341EB91003207400B308
+          4B10FC1E06624E310621609F4316029433DBB9A12490CB174B902A414D0436D4
+          18C82EE5702934954C44075F1AF8FED8390039A98294A50164B3B9DEF73FFDB5
+          CDB90D5CB993729C09ADC1DCB86BCF7670D53FA509A9F118F032C258689A26C7
+          264F457B3B8F25C77A6601985245C7BD0620BB720F8040152F33CFDDFB4F46B9
+          0DE98C616D8D070B89258C0C4FCDA6A64387877E387156770DAAF436CC48E5AA
+          00F04B81ECE787CF6BC0E01C918129CC4CCD9C9AB8D8FD7A72F47C59D7950056
+          2A7D349459DA532FE06348CD2C607C3496988F855F2EE77ACD3EC99617B308FD
+          7915A1CBA35F857FFEE03E59FC3B00692993883800BAAE0F922217300C068331
+          947BCBF7FD3E329B9DBB7278F0EC71CD35E95BB77A80CAC54156D1FC72E262D7
+          F144E4A7B8D3E1442450C572476B15CB27B551EA06DB0893AABAB617AB5FDCDE
+          72D23ABC4AADFF375C07F80B5BD1FAE512AAB3030000000049454E44AE426082}
+        TabOrder = 1
+      end
+    end
+  end
+  object SQLQuery1: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'select * from produto')
+    SQLConnection = DataModuleConexao.Conn
+    Left = 513
+    Top = 43
+    object SQLQuery1CODIGO_PRODUTO: TIntegerField
+      FieldName = 'CODIGO_PRODUTO'
+      Required = True
+    end
+    object SQLQuery1NOME_PRODUTO: TStringField
+      FieldName = 'NOME_PRODUTO'
+      Required = True
+      Size = 400
+    end
+    object SQLQuery1DESCRICAO_PRODUTO: TStringField
+      FieldName = 'DESCRICAO_PRODUTO'
+      Size = 1020
+    end
+    object SQLQuery1PRECO_PRODUTO: TFMTBCDField
+      FieldName = 'PRECO_PRODUTO'
+      Required = True
+      Precision = 18
+      Size = 2
+    end
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = SQLQuery1
+    Options = [poAllowMultiRecordUpdates, poAutoRefresh, poUseQuoteChar]
+    Left = 505
+    Top = 99
+  end
+  object DataSource1: TDataSource
+    DataSet = SQLQuery1
+    Left = 400
+    Top = 128
+  end
+  object SQLDataSet1: TSQLDataSet
+    GetMetadata = False
+    ObjectView = True
+    DataSource = DataSource1
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = DataModuleConexao.Conn
+    Left = 321
+    Top = 91
+    object SQLDataSet1CODIGO_PRODUTO: TIntegerField
+      FieldName = 'CODIGO_PRODUTO'
+      Required = True
+    end
+    object SQLDataSet1NOME_PRODUTO: TStringField
+      FieldName = 'NOME_PRODUTO'
+      Required = True
+      Size = 400
+    end
+    object SQLDataSet1DESCRICAO_PRODUTO: TStringField
+      FieldName = 'DESCRICAO_PRODUTO'
+      Size = 1020
+    end
+    object SQLDataSet1PRECO_PRODUTO: TFMTBCDField
+      FieldName = 'PRECO_PRODUTO'
+      Required = True
+      Precision = 18
+      Size = 2
+    end
+  end
+end

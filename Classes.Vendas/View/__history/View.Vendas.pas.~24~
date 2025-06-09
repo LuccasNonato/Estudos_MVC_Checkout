@@ -1,0 +1,82 @@
+unit View.Vendas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxSkinsCore, dxSkinsDefaultPainters,
+  Vcl.ExtCtrls, dxBar, cxClasses, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxStyles, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, cxNavigator, dxDateRanges, Data.DB, cxDBData,
+  dxCustomTileControl, dxTileControl, cxGridLevel, cxGridCustomView,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
+  Data.FMTBcd, Data.SqlExpr, Datasnap.Provider, datamodule.conexao, Vcl.Buttons,
+  cxContainer, cxMaskEdit, cxButtonEdit, cxLabel, cxTextEdit,
+  dxLayoutControlAdapters, dxLayoutcxEditAdapters, dxLayoutContainer,
+  dxLayoutControl, Vcl.Menus, Vcl.StdCtrls, cxButtons;
+
+type
+  TFrmViewVendas = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    dxTileControl1: TdxTileControl;
+    dxTileControl1Group1: TdxTileControlGroup;
+    dxTileControl1NovaVenda: TdxTileControlItem;
+    dxTileControl1Item1: TdxTileControlItem;
+    QRY_Venda: TSQLQuery;
+    DSP_Venda: TDataSetProvider;
+    DS_Venda: TDataSource;
+    QRY_VendaCODIGO_PRODUTO: TIntegerField;
+    QRY_VendaNOME_PRODUTO: TStringField;
+    QRY_VendaDESCRICAO_PRODUTO: TStringField;
+    QRY_VendaPRECO_PRODUTO: TFMTBCDField;
+    cxGrid1DBTableView1CODIGO_PRODUTO: TcxGridDBColumn;
+    cxGrid1DBTableView1NOME_PRODUTO: TcxGridDBColumn;
+    cxGrid1DBTableView1DESCRICAO_PRODUTO: TcxGridDBColumn;
+    cxGrid1DBTableView1PRECO_PRODUTO: TcxGridDBColumn;
+    PanelSelecionaProduto: TPanel;
+    cxLabel1: TcxLabel;
+    cxTextEdit3: TcxTextEdit;
+    cxTextEdit2: TcxTextEdit;
+    cxCodProduto: TcxButtonEdit;
+    dxLayoutControl1: TdxLayoutControl;
+    Panel6: TPanel;
+    cxLabel2: TcxLabel;
+    cxTextEdit1: TcxTextEdit;
+    cxTextEdit4: TcxTextEdit;
+    cxButtonEdit1: TcxButtonEdit;
+    dxLayoutControl1Group_Root: TdxLayoutGroup;
+    dxLayoutItem1: TdxLayoutItem;
+    dxLayoutItem2: TdxLayoutItem;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutItem4: TdxLayoutItem;
+    dxLayoutItem5: TdxLayoutItem;
+    cxGrid2: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    cxGridDBColumn1: TcxGridDBColumn;
+    cxGridDBColumn2: TcxGridDBColumn;
+    cxGridDBColumn3: TcxGridDBColumn;
+    cxGridDBColumn4: TcxGridDBColumn;
+    cxGridLevel1: TcxGridLevel;
+    cxButton1: TcxButton;
+    dxTileControl2: TdxTileControl;
+    dxTileControlGroup1: TdxTileControlGroup;
+    dxTileControlItem3: TdxTileControlItem;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmViewVendas: TFrmViewVendas;
+
+implementation
+
+{$R *.dfm}
+
+end.

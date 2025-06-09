@@ -1,0 +1,138 @@
+unit Cadastro.Controller.Produtos;
+
+interface
+
+uses
+  Cadastro.Controller.interfaces, Cadastro.Produto.model.interfaces, sqlexpr,
+  datamodule.conexao, system.SysUtils, data.dbxcommon;
+
+type
+   TControllerCadastro = class(TInterfacedObject, iControllerCadastro)
+     private
+      FProduto: iCadastroProduto;
+     public
+      constructor Create;
+      destructor  Destroy; override;
+      class function New : iControllerCadastro;
+
+      function Produto(AProduto: ICadastroProduto): iControllerCadastro;
+      function CadastrarProduto : iControllerCadastro;
+      function EditarProduto : iControllerCadastro;
+      function DeletarProduto : iControllerCadastro;
+   end;
+implementation
+
+{ TControllerCadastro }
+
+function TControllerCadastro.CadastrarProduto: iControllerCadastro;
+var
+  Qry: TSQLQuery;
+  TransDesc: TTransactionDesc;
+begin
+  Result := Self;
+
+  if not DataModuleConexao.Conn.Connected then
+  DataModuleConexao.Conn.Connected := True;
+
+  Qry := TSQLQuery.Create(nil);
+  try
+    Qry.SQLConnection := DataModuleConexao.Conn;
+
+    FillChar(TransDesc, SizeOf(TransDesc), 0);
+    TransDesc.TransactionID := 1;
+    TransDesc.IsolationLevel := xilREADCOMMITTED;
+
+    DataModuleConexao.Conn.StartTransaction(TransDesc);
+
+    Qry.SQL.Text :=
+      'INSERT INTO PRODUTO (NOME_PRODUTO, DESCRICAO_PRODUTO, PRECO_PRODUTO) ' +
+      'VALUES (:NOME, :DESCRICAO, :PRECO)';
+    Qry.ParamByName('NOME').AsString := FProduto.NomeProduto;
+    Qry.ParamByName('DESCRICAO').AsString := FProduto.DescricaoProduto;
+    Qry.ParamByName('PRECO').AsCurrency := FProduto.PrecoProduto;
+
+    Qry.ExecSQL;
+
+    Qry.SQLConnection.Commit(TransDesc);
+  except
+    on E: Exception do
+    begin
+      DataModuleConexao.Conn.Rollback(TransDesc);
+      raise Exception.Create('Erro ao cadastrar produto: ' + E.Message);
+    end;
+  end;
+  Qry.Free;
+end;
+
+constructor TControllerCadastro.Create;
+begin
+
+end;
+
+
+function TControllerCadastro.DeletarProduto: iControllerCadastro;
+var
+  Qry: TSQLQuery;
+  TransDesc: TTransactionDesc;
+begin
+  Result := Self;
+
+  Qry := TSQLQuery.Create(nil);
+  try
+    Qry.SQLConnection := DataModuleConexao.Conn;
+    Qry.SQL.Text := 'DELETE FROM PRODUTO WHERE CODIGO_PRODUTO = :ID';
+    Qry.ParamByName('ID').AsInteger := FProduto.CodigoProduto;
+
+    Qry.ExecSQL;
+    Qry.SQLConnection.Commit(TransDesc);
+  except
+    on E: Exception do
+      raise Exception.Create('Erro ao deletar produto: ' + E.Message);
+  end;
+  Qry.Free;
+end;
+
+destructor TControllerCadastro.Destroy;
+begin
+
+  inherited;
+end;
+
+function TControllerCadastro.EditarProduto: iControllerCadastro;
+var
+  Qry: TSQLQuery;
+begin
+  Result := Self;
+
+  Qry := TSQLQuery.Create(nil);
+  try
+    Qry.SQLConnection := DataModuleConexao.Conn;
+    Qry.SQL.Text :=
+      'UPDATE PRODUTO SET NOME_PRODUTO = :NOME, DESCRICAO_PRODUTO = :DESCRICAO, PRECO_PRODUTO = :PRECO ' +
+      'WHERE ID_PRODUTO = :ID';
+
+    Qry.ParamByName('NOME').AsString := FProduto.NomeProduto;
+    Qry.ParamByName('DESCRICAO').AsString := FProduto.DescricaoProduto;
+    Qry.ParamByName('PRECO').AsCurrency := FProduto.PrecoProduto;
+    Qry.ParamByName('ID').AsInteger := FProduto.CodigoProduto;
+
+    Qry.ExecSQL;
+  except
+    on E: Exception do
+      raise Exception.Create('Erro ao editar produto: ' + E.Message);
+  end;
+  Qry.Free;
+end;
+
+class function TControllerCadastro.New: iControllerCadastro;
+begin
+  Result := Self.Create;
+end;
+
+function TControllerCadastro.Produto(AProduto: iCadastroProduto): iControllerCadastro;
+begin
+  FProduto := AProduto;
+  Result := Self;
+end;
+
+end.
