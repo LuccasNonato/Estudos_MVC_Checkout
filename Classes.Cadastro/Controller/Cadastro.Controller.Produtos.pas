@@ -9,20 +9,73 @@ uses
 type
    TControllerCadastro = class(TInterfacedObject, iControllerCadastro)
      private
-      FProduto: iCadastroProduto;
      public
+      FProduto: iCadastroProduto;
+      FCodigoProduto : Integer;
+      FDescricaoProduto : string;
+      FValor : Currency;
+
       constructor Create;
       destructor  Destroy; override;
       class function New : iControllerCadastro;
 
-      function Produto(AProduto: ICadastroProduto): iControllerCadastro;
+      function Produto(AProduto: ICadastroProduto): iControllerCadastro; overload;
+      function Produto: iCadastroProduto; overload;
       function CadastrarProduto : iControllerCadastro;
+      function BuscarProduto(Value: integer): iControllerCadastro;
       function EditarProduto : iControllerCadastro;
       function DeletarProduto : iControllerCadastro;
    end;
 implementation
 
 { TControllerCadastro }
+
+function TControllerCadastro.BuscarProduto(Value: integer): iControllerCadastro;
+var
+  Qry: TSQLQuery;
+  TransDesc: TTransactionDesc;
+begin
+  Result := Self;
+
+  if not DataModuleConexao.Conn.Connected then
+    DataModuleConexao.Conn.Connected := True;
+
+  Qry := TSQLQuery.Create(nil);
+  try
+    Qry.SQLConnection := DataModuleConexao.Conn;
+
+    FillChar(TransDesc, SizeOf(TransDesc), 0);
+    TransDesc.TransactionID := 1;
+    TransDesc.IsolationLevel := xilREADCOMMITTED;
+
+    Qry.SQLConnection.StartTransaction(TransDesc);
+
+    Qry.SQL.Text :=
+      'SELECT * FROM PRODUTO WHERE CODIGO_PRODUTO = :CODIGO';
+    Qry.ParamByName('CODIGO').AsInteger := Value;
+
+    Qry.Open;
+
+    if not Qry.IsEmpty then
+    begin
+      FProduto
+        .CodigoProduto(Qry.FieldByName('CODIGO_PRODUTO').AsInteger)
+        .NomeProduto(Qry.FieldByName('NOME_PRODUTO').AsString)
+        .DescricaoProduto(Qry.FieldByName('DESCRICAO_PRODUTO').AsString)
+        .PrecoProduto(Qry.FieldByName('PRECO_PRODUTO').AsCurrency);
+    end;
+
+    Qry.SQLConnection.Commit(TransDesc);
+  except
+    on E: Exception do
+    begin
+      Qry.SQLConnection.Rollback(TransDesc);
+      raise Exception.Create('Erro ao buscar produto: ' + E.Message);
+    end;
+  end;
+
+  Qry.Free;
+end;
 
 function TControllerCadastro.CadastrarProduto: iControllerCadastro;
 var
@@ -129,6 +182,11 @@ end;
 class function TControllerCadastro.New: iControllerCadastro;
 begin
   Result := Self.Create;
+end;
+
+function TControllerCadastro.Produto: iCadastroProduto;
+begin
+  Result := FProduto;
 end;
 
 function TControllerCadastro.Produto(AProduto: iCadastroProduto): iControllerCadastro;

@@ -3,16 +3,21 @@ unit Cadastro.Vendas.Model;
 interface
 
 uses
-  Cadastro.Vendas.Interfaces;
+  Cadastro.Vendas.Model.Interfaces;
 
 type
-  TCadastroVendas = class(TInterfacedObject, ICadastroVendas)
+  TCadastroVendasModel = class(TInterfacedObject, ICadastroVendas)
     private
      FCodigoVenda : integer;
      FDataVenda : TDate;
      FNomeCliente : string;
      FCEP : string;
-     FEndereco : string;
+     FEnderecoRua : string;
+     FEnderecoNumero : string;
+     FEnderecoBairro : string;
+     FEnderecoCidade : string;
+     FEnderecoEstado : string;
+     FValorTotalVenda : Currency;
     public
       constructor Create;
       Destructor Destroy; override;
@@ -31,96 +36,155 @@ type
       function CEP(Value : string): ICadastroVendas; overload;
       function CEP : string; overload;
 
-      function Endereco(Value : string): ICadastroVendas; overload;
-      function Endereco : string; overload;
+      function EnderecoRua(Value : string): ICadastroVendas; overload;
+      function EnderecoRua : string; overload;
 
-      function ValorTotal(Value : currency) : ICadastroVendas; overload;
-      function ValorTotal : currency; overload;
+      function EnderecoNumero(Value : string): ICadastroVendas; overload;
+      function EnderecoNumero : string; overload;
+
+      function EnderecoBairro(Value : string): ICadastroVendas; overload;
+      function EnderecoBairro : string; overload;
+
+      function EnderecoCidade(Value : string): ICadastroVendas; overload;
+      function EnderecoCidade : string; overload;
+
+      function EnderecoEstado(Value : string): ICadastroVendas; overload;
+      function EnderecoEstado : string; overload;
+
+      function ValorTotalVenda(Value : currency) : ICadastroVendas; overload;
+      function ValorTotalVenda : currency; overload;
+
   end;
 
 implementation
 
 { TCadastroVendas }
 
-function TCadastroVendas.CEP: string;
+function TCadastroVendasModel.CEP: string;
 begin
   Result := FCEP;
 end;
 
-function TCadastroVendas.CEP(Value: string): ICadastroVendas;
+function TCadastroVendasModel.CEP(Value: string): ICadastroVendas;
 begin
    Result := Self;
    FCEP := Value;
 end;
 
-function TCadastroVendas.CodigoVenda: Integer;
+function TCadastroVendasModel.CodigoVenda: Integer;
 begin
   Result := FCodigoVenda;
 end;
 
-function TCadastroVendas.CodigoVenda(Value: integer): ICadastroVendas;
+function TCadastroVendasModel.CodigoVenda(Value: integer): ICadastroVendas;
 begin
   Result := Self;
   FCodigoVenda := Value;
 end;
 
-constructor TCadastroVendas.Create;
+constructor TCadastroVendasModel.Create;
 begin
 
 end;
 
-function TCadastroVendas.DataVenda(Value: TDate): ICadastroVendas;
+function TCadastroVendasModel.DataVenda(Value: TDate): ICadastroVendas;
 begin
   Result := Self;
   FDataVenda := Value;
 end;
 
-function TCadastroVendas.DataVenda: TDate;
+function TCadastroVendasModel.DataVenda: TDate;
 begin
   Result := FDataVenda
 end;
 
-destructor TCadastroVendas.Destroy;
+destructor TCadastroVendasModel.Destroy;
 begin
 
   inherited;
 end;
 
-function TCadastroVendas.Endereco(Value: string): ICadastroVendas;
+function TCadastroVendasModel.EnderecoBairro(Value: string): ICadastroVendas;
 begin
   Result := Self;
-  FEndereco := Value;
+  FEnderecoBairro := Value;
 end;
 
-function TCadastroVendas.Endereco: string;
+
+function TCadastroVendasModel.EnderecoBairro: string;
 begin
-  Result := FEndereco;
+  Result := FEnderecoBairro;
 end;
 
-class function TCadastroVendas.New: ICadastroVendas;
+function TCadastroVendasModel.EnderecoCidade: string;
+begin
+  Result := FEnderecoCidade;
+end;
+
+function TCadastroVendasModel.EnderecoCidade(Value: string): ICadastroVendas;
+begin
+  Result := Self;
+  FEnderecoCidade := Value;
+end;
+
+function TCadastroVendasModel.EnderecoEstado: string;
+begin
+  Result := FEnderecoEstado;
+end;
+
+function TCadastroVendasModel.EnderecoEstado(Value: string): ICadastroVendas;
+begin
+  Result := Self;
+  FEnderecoEstado := Value;
+end;
+
+function TCadastroVendasModel.EnderecoNumero: string;
+begin
+  Result := FEnderecoNumero;
+end;
+
+function TCadastroVendasModel.EnderecoNumero(Value: string): ICadastroVendas;
+begin
+  Result := Self;
+  FEnderecoNumero := Value;
+end;
+
+function TCadastroVendasModel.EnderecoRua(Value: string): ICadastroVendas;
+begin
+  Result := Self;
+  FEnderecoRua := Value;
+end;
+
+function TCadastroVendasModel.EnderecoRua: string;
+begin
+  Result := FEnderecoRua;
+end;
+
+class function TCadastroVendasModel.New: ICadastroVendas;
 begin
   Result := Self.Create;
 end;
 
-function TCadastroVendas.NomeCliente(Value: string): ICadastroVendas;
+function TCadastroVendasModel.NomeCliente(Value: string): ICadastroVendas;
 begin
   Result := Self;
   FNomeCliente := Value;
 end;
 
-function TCadastroVendas.NomeCliente: string;
+function TCadastroVendasModel.NomeCliente: string;
 begin
   Result := FNomeCliente;
 end;
 
-function TCadastroVendas.ValorTotal(Value: currency): ICadastroVendas;
+function TCadastroVendasModel.ValorTotalVenda: currency;
 begin
-
+  Result := FValorTotalVenda;
 end;
 
-function TCadastroVendas.ValorTotal: currency;
+function TCadastroVendasModel.ValorTotalVenda(Value: currency): ICadastroVendas;
 begin
-
+  Result := Self;
+  FValorTotalVenda := Value;
 end;
 
 end.

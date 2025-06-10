@@ -161,5 +161,21 @@ object FrmViewMain: TFrmViewMain
       Text4.AssignedValues = []
       OnClick = dxTileControlVenderClick
     end
+    object dxTileControl1Item1: TdxTileControlItem
+      GroupIndex = 0
+      IndexInGroup = 2
+      Size = tcisLarge
+      Text1.AssignedValues = [avColor, avFont]
+      Text1.Color = clBlack
+      Text1.Font.Charset = DEFAULT_CHARSET
+      Text1.Font.Color = clBlack
+      Text1.Font.Height = -16
+      Text1.Font.Name = 'Segoe UI'
+      Text1.Font.Style = [fsBold]
+      Text1.Value = 'Relat'#243'rios'
+      Text2.AssignedValues = []
+      Text3.AssignedValues = []
+      Text4.AssignedValues = []
+    end
   end
 end

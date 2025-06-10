@@ -92,7 +92,7 @@
         <DCCReference Include="Classes.Vendas\Model\Cadastro.Vendas.Model.pas"/>
         <DCCReference Include="Classes.Cadastro\Model\Cadastro.Produto.model.Interfaces.pas"/>
         <DCCReference Include="Classes.Cadastro\Model\Cadastro.Produto.Model.pas"/>
-        <DCCReference Include="Classes.Vendas\Model\Cadastro.Vendas.Interfaces.pas"/>
+        <DCCReference Include="Classes.Vendas\Model\Cadastro.Vendas.Model.Interfaces.pas"/>
         <DCCReference Include="DataModule.Conexao.pas">
             <Form>DataModuleConexao</Form>
             <FormType>dfm</FormType>
@@ -111,6 +111,8 @@
             <Form>FrmViewVendas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Classes.Vendas\Controller\Cadastro.Vendas.Controller.interfaces.pas"/>
+        <DCCReference Include="Classes.Vendas\Controller\Cadastro.Vendas.Controller.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

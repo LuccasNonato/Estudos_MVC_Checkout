@@ -13,60 +13,122 @@ uses
   Data.FMTBcd, Data.SqlExpr, Datasnap.Provider, datamodule.conexao, Vcl.Buttons,
   cxContainer, cxMaskEdit, cxButtonEdit, cxLabel, cxTextEdit,
   dxLayoutControlAdapters, dxLayoutcxEditAdapters, dxLayoutContainer,
-  dxLayoutControl, Vcl.Menus, Vcl.StdCtrls, cxButtons;
+  dxLayoutControl, Vcl.Menus, Vcl.StdCtrls, cxButtons, dxPSGlbl, dxPSUtl,
+  dxPSEngn, dxPrnPg, dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider,
+  dxPSFillPatterns, dxPSEdgePatterns, dxPSPDFExportCore, dxPSPDFExport,
+  cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
+  dxPScxPageControlProducer, dxPScxEditorProducers, dxPScxExtEditorProducers,
+  dxPSCore, dxLayoutLookAndFeels, dxmdaset, Datasnap.DBClient, ACBrBase,
+  ACBrSocket, ACBrCEP;
 
 type
   TFrmViewVendas = class(TForm)
     Panel1: TPanel;
-    Panel2: TPanel;
     Panel3: TPanel;
     cxGrid1: TcxGrid;
     cxGrid1DBTableView1: TcxGridDBTableView;
     cxGrid1Level1: TcxGridLevel;
-    dxTileControl1: TdxTileControl;
-    dxTileControl1Group1: TdxTileControlGroup;
-    dxTileControl1NovaVenda: TdxTileControlItem;
-    dxTileControl1Item1: TdxTileControlItem;
-    QRY_Venda: TSQLQuery;
     DSP_Venda: TDataSetProvider;
     DS_Venda: TDataSource;
-    QRY_VendaCODIGO_PRODUTO: TIntegerField;
-    QRY_VendaNOME_PRODUTO: TStringField;
-    QRY_VendaDESCRICAO_PRODUTO: TStringField;
-    QRY_VendaPRECO_PRODUTO: TFMTBCDField;
-    cxGrid1DBTableView1CODIGO_PRODUTO: TcxGridDBColumn;
-    cxGrid1DBTableView1NOME_PRODUTO: TcxGridDBColumn;
-    cxGrid1DBTableView1DESCRICAO_PRODUTO: TcxGridDBColumn;
-    cxGrid1DBTableView1PRECO_PRODUTO: TcxGridDBColumn;
-    PanelSelecionaProduto: TPanel;
     cxLabel1: TcxLabel;
     cxTextEdit3: TcxTextEdit;
     cxTextEdit2: TcxTextEdit;
     cxCodProduto: TcxButtonEdit;
     dxLayoutControl1: TdxLayoutControl;
-    Panel6: TPanel;
-    cxLabel2: TcxLabel;
-    cxTextEdit1: TcxTextEdit;
-    cxTextEdit4: TcxTextEdit;
-    cxButtonEdit1: TcxButtonEdit;
+    cxValorUnitario: TcxTextEdit;
+    cxQuantidade: TcxTextEdit;
+    cxCodigoProduto: TcxButtonEdit;
     dxLayoutControl1Group_Root: TdxLayoutGroup;
-    dxLayoutItem1: TdxLayoutItem;
-    dxLayoutItem2: TdxLayoutItem;
     dxLayoutItem3: TdxLayoutItem;
     dxLayoutItem4: TdxLayoutItem;
     dxLayoutItem5: TdxLayoutItem;
-    cxGrid2: TcxGrid;
-    cxGridDBTableView1: TcxGridDBTableView;
-    cxGridDBColumn1: TcxGridDBColumn;
-    cxGridDBColumn2: TcxGridDBColumn;
-    cxGridDBColumn3: TcxGridDBColumn;
-    cxGridDBColumn4: TcxGridDBColumn;
-    cxGridLevel1: TcxGridLevel;
+    Panel2: TPanel;
+    PanelSelecionaProduto: TPanel;
     cxButton1: TcxButton;
-    dxTileControl2: TdxTileControl;
-    dxTileControlGroup1: TdxTileControlGroup;
-    dxTileControl2Item1: TdxTileControlItem;
+    PanelCliente: TPanel;
+    Label1: TLabel;
+    dxTileControl1: TdxTileControl;
+    dxTileControlFinalizarVenda: TdxTileControlItem;
+    dxTileControl1Group1: TdxTileControlGroup;
+    dxTileControlBuscarItem: TdxTileControlItem;
+    dxTileControlCancelarVenda: TdxTileControlItem;
+    dxTileControlIniciarVenda: TdxTileControlItem;
+    dxLayoutLookAndFeelList1: TdxLayoutLookAndFeelList;
+    dxLayoutSkinLookAndFeel1: TdxLayoutSkinLookAndFeel;
+    dxLayoutItem14: TdxLayoutItem;
+    cxNomeProd: TcxTextEdit;
+    dxLayoutAutoCreatedGroup1: TdxLayoutAutoCreatedGroup;
+    Mem_Venda: TdxMemData;
+    Mem_VendaNome: TStringField;
+    Mem_VendaValor: TCurrencyField;
+    Mem_VendaCodigo: TIntegerField;
+    Mem_VendaQuantidade: TStringField;
+    CDS_Venda: TClientDataSet;
+    CDS_VendaRecId: TIntegerField;
+    CDS_VendaCodigo: TIntegerField;
+    CDS_VendaNome: TStringField;
+    CDS_VendaValorUnit: TCurrencyField;
+    CDS_VendaQuantidade: TStringField;
+    cxAddItem: TcxButton;
+    dxLayoutItem15: TdxLayoutItem;
+    Mem_VendaValorTotal: TCurrencyField;
+    CDS_VendaValorTotal: TCurrencyField;
+    cxGrid1DBTableView1Codigo: TcxGridDBColumn;
+    cxGrid1DBTableView1Nome: TcxGridDBColumn;
+    cxGrid1DBTableView1ValorUnit: TcxGridDBColumn;
+    cxGrid1DBTableView1Quantidade: TcxGridDBColumn;
+    cxGrid1DBTableView1ValorTotal: TcxGridDBColumn;
+    cxValorTotal: TcxTextEdit;
+    dxLayoutItem1: TdxLayoutItem;
+    ACBrCEP1: TACBrCEP;
+    cxTextEdit1: TcxTextEdit;
+    cxTextEdit4: TcxTextEdit;
+    cxTextEdit5: TcxTextEdit;
+    cxTextEdit6: TcxTextEdit;
+    Label2: TLabel;
+    cxTextEdit8: TcxTextEdit;
+    cxTextEdit10: TcxTextEdit;
+    cxTextEdit11: TcxTextEdit;
+    cxTextEdit12: TcxTextEdit;
+    cxTextEdit13: TcxTextEdit;
+    cxTextEdit14: TcxTextEdit;
+    Label3: TLabel;
+    cxTextEdit15: TcxTextEdit;
+    cxTextEdit16: TcxTextEdit;
+    dxLayoutItem2: TdxLayoutItem;
+    dxLayoutControl2: TdxLayoutControl;
+    Label4: TLabel;
+    dxLayoutControl2Group_Root1: TdxLayoutGroup;
+    dxLayoutItem11: TdxLayoutItem;
+    dxLayoutItem6: TdxLayoutItem;
+    cxNomeCliente: TcxTextEdit;
+    dxLayoutItem7: TdxLayoutItem;
+    cxCep: TcxTextEdit;
+    dxLayoutItem8: TdxLayoutItem;
+    cxRua: TcxTextEdit;
+    dxLayoutItem9: TdxLayoutItem;
+    cxNumero: TcxTextEdit;
+    dxLayoutItem10: TdxLayoutItem;
+    cxBairro: TcxTextEdit;
+    dxLayoutItem12: TdxLayoutItem;
+    cxCidade: TcxTextEdit;
+    dxLayoutItem13: TdxLayoutItem;
+    cxEstado: TcxTextEdit;
+    dxLayoutItem16: TdxLayoutItem;
+    Label5: TLabel;
+    procedure dxTileControlIniciarVendaClick(Sender: TdxTileControlItem);
+    procedure dxTileControlCancelarVendaClick(Sender: TdxTileControlItem);
+    procedure dxTileControlFinalizarVendaClick(Sender: TdxTileControlItem);
+    procedure cxCodigoProdutoExit(Sender: TObject);
+    procedure cxAddItemClick(Sender: TObject);
+    procedure cxCodigoProdutoKeyPress(Sender: TObject; var Key: Char);
+    procedure cxValorUnitarioKeyPress(Sender: TObject; var Key: Char);
+    procedure cxQuantidadeKeyPress(Sender: TObject; var Key: Char);
+    procedure cxCepExit(Sender: TObject);
+    procedure dxTileControlBuscarItemClick(Sender: TdxTileControlItem);
   private
+    function RemoverCaracteresEspeciais(const Texto: string): string;
+    procedure LimpaInfos;
     { Private declarations }
   public
     { Public declarations }
@@ -77,6 +139,253 @@ var
 
 implementation
 
+uses
+  Cadastro.Vendas.Controller, Cadastro.vendas.model, Cadastro.controller.produtos, cadastro.produto.model,
+  cadastro.controller.interfaces, View.cadastro.produto;
+
 {$R *.dfm}
+
+procedure TFrmViewVendas.cxAddItemClick(Sender: TObject);
+var
+  Quantidade: Currency;
+  PrecoUnitario, TotalItem: Currency;
+begin
+
+  if cxNomeProd.EditValue = '' then
+  begin
+   ShowMessage('Informe uma Código válido.');
+   cxCodigoProduto.SetFocus;
+   Exit;
+  end;
+
+
+  if StrToIntDef(VarToStr(cxCodigoProduto.EditValue), 0) <= 0 then
+  begin
+    ShowMessage('Informe uma Código válido.');
+    cxCodigoProduto.SetFocus;
+    Exit;
+  end;
+
+  if StrToIntDef(VarToStr(cxQuantidade.EditValue), 0) <= 0 then
+  begin
+    ShowMessage('Informe uma quantidade válida.');
+    cxQuantidade.SetFocus;
+    Exit;
+  end;
+
+  if StrToIntDef(VarToStr(cxValorUnitario.EditValue), 0) <= 0 then
+  begin
+    ShowMessage('Informe um Valor válido.');
+    cxValorUnitario.SetFocus;
+    Exit;
+  end;
+
+  Quantidade := cxQuantidade.EditValue;
+  PrecoUnitario := cxValorUnitario.EditValue;
+  TotalItem := Quantidade * PrecoUnitario;
+
+  mem_venda.Edit;
+  mem_venda.Append;
+  Mem_VendaCodigo.AsInteger := cxCodigoProduto.EditValue;
+  Mem_VendaNome.AsString := cxNomeProd.Text;
+  Mem_VendaQuantidade.AsCurrency := Quantidade;
+  Mem_VendaValor.AsCurrency := PrecoUnitario;
+  Mem_VendaValorTotal.AsCurrency := TotalItem;
+  mem_venda.Post;
+
+  cxValorTotal.EditValue := cxValorTotal.EditValue + TotalItem;
+
+  cxCodigoProduto.EditValue := '';
+  cxNomeProd.EditValue := '';
+  cxValorUnitario.EditValue := '';
+  cxQuantidade.EditValue := '';
+
+  cxCodigoProduto.SetFocus;
+end;
+
+procedure TFrmViewVendas.cxCepExit(Sender: TObject);
+begin
+  ACBrCEP1.BuscarPorCEP(cxCep.Text);
+
+  if ACBrCEP1.Enderecos.Count > 0 then
+  begin
+    cxRua.Text    := ACBrCEP1.Enderecos[0].Tipo_Logradouro + ' ' + ACBrCEP1.Enderecos[0].Logradouro;
+    cxNumero.Text := '';
+    cxCidade.Text := ACBrCEP1.Enderecos[0].Municipio;
+    cxEstado.Text := ACBrCEP1.Enderecos[0].UF;
+    cxBairro.Text := RemoverCaracteresEspeciais(ACBrCEP1.Enderecos[0].Bairro);
+    cxNumero.SetFocus;
+  end
+  else
+    ShowMessage('CEP não encontrado.');
+end;
+
+function TFrmViewVendas.RemoverCaracteresEspeciais(const Texto: string): string;
+var
+  i: Integer;
+  c: Char;
+begin
+  Result := '';
+  for i := 1 to Length(Texto) do
+  begin
+    c := Texto[i];
+    if (c in ['A'..'Z']) or (c in ['a'..'z']) or (c in ['0'..'9']) or (c = ' ') then
+      Result := Result + c;
+  end;
+end;
+
+procedure TFrmViewVendas.LimpaInfos;
+begin
+  dxLayoutControl1Group_Root.Enabled := False;
+  dxLayoutControl2Group_Root1.Enabled := False;
+  Mem_Venda.Cancel;
+  Mem_Venda.Close;
+  Mem_Venda.Open;
+  ds_Venda.DataSet := nil;
+  cxCodProduto.Clear;
+  cxNomeProd.Clear;
+  cxQuantidade.EditValue := 0;
+  cxValorUnitario.EditValue := 0;
+  cxValorTotal.EditValue := 0;
+
+
+  //clientes
+  cxNomeCliente.Text := '';
+  cxCep.Text := '';
+  cxNumero.Text := '';
+  cxRua.Text := '';
+  cxBairro.Text := '';
+  cxEstado.Text := '';
+
+  ds_Venda.DataSet := Mem_Venda;
+  Mem_Venda.Append;
+end;
+
+
+procedure TFrmViewVendas.cxCodigoProdutoExit(Sender: TObject);
+var
+  Controller: iControllerCadastro;
+begin
+  if (VarToStr(cxCodigoProduto.EditValue) = '') then
+  exit;
+
+
+  Controller := TControllerCadastro.New
+                  .Produto(TCadastroProduto.New
+                              .CodigoProduto(cxCodigoProduto.EditValue))
+                  .BuscarProduto(cxCodigoProduto.EditValue);
+
+  cxNomeProd.EditValue := Controller.Produto.NomeProduto;
+  cxValorUnitario.EditValue := Controller.Produto.PrecoProduto;
+  cxQuantidade.SetFocus;
+end;
+
+procedure TFrmViewVendas.cxCodigoProdutoKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Key = #13 then
+  begin
+    Key := #0;
+    Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
+end;
+
+procedure TFrmViewVendas.cxQuantidadeKeyPress(Sender: TObject; var Key: Char);
+begin
+ if Key = #13 then
+ begin
+    Key := #0;
+    Perform(WM_NEXTDLGCTL, 0, 0);
+ end;
+end;
+
+procedure TFrmViewVendas.cxValorUnitarioKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+ if Key = #13 then
+ begin
+    Key := #0;
+    Perform(WM_NEXTDLGCTL, 0, 0);
+ end;
+end;
+
+procedure TFrmViewVendas.dxTileControlBuscarItemClick(Sender: TdxTileControlItem);
+var
+  frmViewCadastroProduto: TFrmViewCadastroProduto;
+begin
+  frmViewCadastroProduto := TFrmViewCadastroProduto.Create(Self);
+  try
+    frmViewCadastroProduto.dxBarLargeButtonEditar.Visible := ivNever;
+    frmViewCadastroProduto.dxBarLargeButtonExcluir.Visible := ivNever;
+    frmViewCadastroProduto.dxBarLargeButtonNovo.Visible := ivNever;
+    frmViewCadastroProduto.dxBarLargeButtonSalvar.Visible := ivNever;
+    frmViewCadastroProduto.dxBarLargeButtonSelecionaItem.Visible := ivAlways;
+
+    Panel1.Visible := False;
+    Panel1.Enabled := False;
+
+    if frmViewCadastroProduto.ShowModal = mrOk then
+    begin
+      cxCodProduto.EditValue := frmViewCadastroProduto.ProdutoSelecionadoID;
+
+      cxCodigoProdutoExit(cxCodProduto);
+    end;
+  finally
+    frmViewCadastroProduto.Release;
+  end;
+end;
+
+
+procedure TFrmViewVendas.dxTileControlCancelarVendaClick(
+  Sender: TdxTileControlItem);
+var
+  MsgResult: Integer;
+begin
+  MsgResult := MessageDlg('Tem certeza que deseja cancelar a venda?', mtConfirmation, [mbYes, mbNo], 0);
+
+  if MsgResult = mrYes then
+  begin
+    LimpaInfos;
+  end
+  else
+  begin
+   cxCodigoProduto.SetFocus;
+   exit;
+  end;
+end;
+
+
+
+procedure TFrmViewVendas.dxTileControlFinalizarVendaClick(
+  Sender: TdxTileControlItem);
+var
+ Faturar : TCadastroVendas;
+begin
+  if dxLayoutControl1Group_Root.Enabled = False  then
+  begin
+     ShowMessage('Deve Iniciar a Venda Para Poder Finalizar!');
+     exit;
+  end;
+
+  TCadastroVendas.New
+                 .DadosVendas(TCadastroVendasModel.New
+                                                  .DataVenda(now)
+                                                  .NomeCliente(cxNomeCliente.Text)
+                                                  .CEP(cxCep.Text)
+                                                  .EnderecoRua(cxRua.Text)
+                                                  .EnderecoBairro(cxBairro.Text)
+                                                  .EnderecoNumero(cxNumero.Text)
+                                                  .EnderecoEstado(cxEstado.Text)
+                                                  .ValorTotalVenda(strtocurr(cxValorTotal.Text))).FaturarVenda;
+  LimpaInfos;
+  ShowMessage('Venda Realizada Com Sucesso!');
+end;
+
+procedure TFrmViewVendas.dxTileControlIniciarVendaClick(Sender: TdxTileControlItem);
+begin
+  dxLayoutControl1Group_Root.Enabled := True;
+  dxLayoutControl2Group_Root1.Enabled := True;
+  cxCodigoProduto.SetFocus;
+end;
 
 end.

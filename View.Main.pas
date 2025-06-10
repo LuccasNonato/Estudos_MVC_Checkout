@@ -14,6 +14,7 @@ type
     dxTileControlCadastroProduto: TdxTileControlItem;
     dxTileControl1Group1: TdxTileControlGroup;
     dxTileControlVender: TdxTileControlItem;
+    dxTileControl1Item1: TdxTileControlItem;
     procedure dxTileControlCadastroProdutoClick(Sender: TdxTileControlItem);
     procedure dxTileControlVenderClick(Sender: TdxTileControlItem);
   private

@@ -8,13 +8,13 @@ uses
 type
 
    iControllerCadastro = interface
-     ['{CDDE2601-7EB5-4E07-BFBE-99C0D876D8B6}']
-     function Produto(AProduto: iCadastroProduto): iControllerCadastro;
+     ['{3480728E-FF9B-4846-B4E7-B48947821FA2}']
+     function Produto(AProduto: iCadastroProduto): iControllerCadastro; overload;
+     function Produto: iCadastroProduto; overload;
+     function BuscarProduto(Value: Integer): iControllerCadastro;
      function CadastrarProduto : iControllerCadastro;
      function EditarProduto : iControllerCadastro;
      function DeletarProduto : iControllerCadastro;
-
-     //O NOME DO CONTROLLER É CONTROLLER CADASTRO POIS ELE PODE SERVIR PARA CADASTRAR FUTURAS ROTINAS, CLIENTES, PARTES FICAIS E ETC.
    end;
 
 implementation

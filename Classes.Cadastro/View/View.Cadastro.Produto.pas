@@ -11,7 +11,7 @@ uses
   cxGridLevel, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid, dxBar, Vcl.ExtCtrls, cxContainer,
   dxLayoutcxEditAdapters, cxTextEdit, sqlexpr, Data.FMTBcd, Datasnap.Provider,
-  cxMaskEdit, cxSpinEdit, cxDBEdit;
+  cxMaskEdit, cxSpinEdit, cxDBEdit, Datasnap.DBClient;
 
 type
   TAcaoCadastro = (acNovo, acEditar);
@@ -41,7 +41,7 @@ type
     cxGrid1DBTableView1: TcxGridDBTableView;
     cxGrid1Level1: TcxGridLevel;
     cxGrid1: TcxGrid;
-    DataSetProvider1: TDataSetProvider;
+    DSP_Produtos: TDataSetProvider;
     SQLDataSet1: TSQLDataSet;
     SQLQuery1: TSQLQuery;
     SQLQuery1CODIGO_PRODUTO: TIntegerField;
@@ -57,10 +57,13 @@ type
     cxGrid1DBTableView1NOME_PRODUTO: TcxGridDBColumn;
     cxGrid1DBTableView1DESCRICAO_PRODUTO: TcxGridDBColumn;
     cxGrid1DBTableView1PRECO_PRODUTO: TcxGridDBColumn;
+    dxBarLargeButtonSelecionaItem: TdxBarLargeButton;
+    CDS_Produtos: TClientDataSet;
     procedure dxBarLargeButtonSalvarClick(Sender: TObject);
     procedure dxBarLargeButtonNovoClick(Sender: TObject);
     procedure dxBarLargeButtonEditarClick(Sender: TObject);
     procedure dxBarLargeButtonExcluirClick(Sender: TObject);
+    procedure dxBarLargeButtonSelecionaItemClick(Sender: TObject);
   private
       CodProduto : Integer;
       FAcao: TAcaoCadastro;
@@ -69,6 +72,7 @@ type
     procedure LimpaCampos;
     { Private declarations }
   public
+    ProdutoSelecionadoID: Integer;
     { Public declarations }
   end;
 
@@ -158,5 +162,17 @@ begin
   dxBarLargeButtonExcluir.Enabled := True;
 end;
 
+
+procedure TFrmViewCadastroProduto.dxBarLargeButtonSelecionaItemClick(
+  Sender: TObject);
+begin
+  if not CDS_Produtos.IsEmpty then
+  begin
+    ProdutoSelecionadoID := CDS_Produtos.FieldByName('CODIGO_PRODUTO').AsInteger;
+    ModalResult := mrOk;
+  end
+  else
+    ShowMessage('Selecione um item da lista.');
+end;
 
 end.
