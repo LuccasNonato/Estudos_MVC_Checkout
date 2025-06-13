@@ -1,10 +1,12 @@
 object DataModuleConexao: TDataModuleConexao
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Height = 301
   Width = 418
   object Conn: TSQLConnection
     ConnectionName = 'FBConnection'
     DriverName = 'Firebird'
+    KeepConnection = False
     LoginPrompt = False
     Params.Strings = (
       'DriverUnit=Data.DBXFirebird'
@@ -32,9 +34,7 @@ object DataModuleConexao: TDataModuleConexao
       'MaxBlobSize=-1'
       'TrimChar=False'
       'DriverName=Firebird'
-      
-        'Database=C:\Users\Luccas\Desktop\Viasoft\Src\AppVendas\XE7\db\Ba' +
-        'nco.FDB'
+      'Database='
       'RoleName=RoleName'
       'User_Name=sysdba'
       'Password=masterkey'
@@ -47,7 +47,6 @@ object DataModuleConexao: TDataModuleConexao
       'WaitOnLocks=True'
       'IsolationLevel=ReadCommitted'
       'Trim Char=False')
-    Connected = True
     Left = 176
     Top = 112
   end

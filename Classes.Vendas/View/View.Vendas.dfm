@@ -12,6 +12,7 @@ object FrmViewVendas: TFrmViewVendas
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -21,8 +22,6 @@ object FrmViewVendas: TFrmViewVendas
     Height = 493
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 1195
-    ExplicitHeight = 342
     object Panel3: TPanel
       Left = 1044
       Top = 1
@@ -30,8 +29,6 @@ object FrmViewVendas: TFrmViewVendas
       Height = 491
       Align = alRight
       TabOrder = 0
-      ExplicitLeft = 909
-      ExplicitHeight = 340
       object cxLabel1: TcxLabel
         Left = 72
         Top = 234
@@ -91,10 +88,8 @@ object FrmViewVendas: TFrmViewVendas
         Align = alClient
         TabOrder = 4
         LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-        ExplicitLeft = 6
-        ExplicitWidth = 278
         object cxValorUnitario: TcxTextEdit
-          Left = 3
+          Left = 10
           Top = 334
           BiDiMode = bdRightToLeft
           Enabled = False
@@ -109,11 +104,10 @@ object FrmViewVendas: TFrmViewVendas
           Style.HotTrack = False
           Style.IsFontAssigned = True
           TabOrder = 3
-          OnKeyPress = cxValorUnitarioKeyPress
           Width = 263
         end
         object cxQuantidade: TcxTextEdit
-          Left = 3
+          Left = 10
           Top = 385
           BiDiMode = bdRightToLeftNoAlign
           Enabled = False
@@ -128,11 +122,10 @@ object FrmViewVendas: TFrmViewVendas
           Style.HotTrack = False
           Style.IsFontAssigned = True
           TabOrder = 4
-          OnKeyPress = cxQuantidadeKeyPress
           Width = 263
         end
         object cxCodigoProduto: TcxButtonEdit
-          Left = 3
+          Left = 10
           Top = 283
           Enabled = False
           ParentFont = False
@@ -152,12 +145,12 @@ object FrmViewVendas: TFrmViewVendas
           Style.HotTrack = False
           Style.IsFontAssigned = True
           TabOrder = 1
+          OnClick = cxCodigoProdutoClick
           OnExit = cxCodigoProdutoExit
-          OnKeyPress = cxCodigoProdutoKeyPress
           Width = 87
         end
         object cxNomeProd: TcxTextEdit
-          Left = 96
+          Left = 103
           Top = 283
           Enabled = False
           ParentFont = False
@@ -174,7 +167,7 @@ object FrmViewVendas: TFrmViewVendas
           Width = 170
         end
         object cxAddItem: TcxButton
-          Left = 93
+          Left = 100
           Top = 418
           Width = 83
           Height = 78
@@ -253,7 +246,7 @@ object FrmViewVendas: TFrmViewVendas
           OnClick = cxAddItemClick
         end
         object cxValorTotal: TcxTextEdit
-          Left = 3
+          Left = 10
           Top = 502
           AutoSize = False
           BiDiMode = bdRightToLeft
@@ -273,11 +266,10 @@ object FrmViewVendas: TFrmViewVendas
           Width = 263
         end
         object dxLayoutControl2: TdxLayoutControl
-          Left = 3
+          Left = 10
           Top = 10
           Width = 263
           Height = 227
-          Align = alClient
           Enabled = False
           TabOrder = 0
           LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
@@ -442,7 +434,7 @@ object FrmViewVendas: TFrmViewVendas
           end
         end
         object Label5: TLabel
-          Left = 3
+          Left = 10
           Top = 243
           Width = 263
           Height = 16
@@ -578,8 +570,6 @@ object FrmViewVendas: TFrmViewVendas
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
-      ExplicitWidth = 908
-      ExplicitHeight = 340
       object cxGrid1DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         FilterBox.CustomizeDialog = False
@@ -613,6 +603,11 @@ object FrmViewVendas: TFrmViewVendas
         OptionsCustomize.ColumnSorting = False
         OptionsCustomize.ColumnsQuickCustomizationReordering = qcrEnabled
         OptionsCustomize.ColumnsQuickCustomizationShowCommands = False
+        OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
         OptionsSelection.CellSelect = False
         OptionsView.CellAutoHeight = True
         OptionsView.ColumnAutoWidth = True
@@ -636,7 +631,10 @@ object FrmViewVendas: TFrmViewVendas
         end
         object cxGrid1DBTableView1Quantidade: TcxGridDBColumn
           DataBinding.FieldName = 'Quantidade'
+          FooterAlignmentHorz = taRightJustify
+          GroupSummaryAlignment = taRightJustify
           HeaderAlignmentHorz = taCenter
+          HeaderGlyphAlignmentHorz = taRightJustify
         end
         object cxGrid1DBTableView1ValorTotal: TcxGridDBColumn
           Caption = 'Valor Total'
@@ -656,8 +654,6 @@ object FrmViewVendas: TFrmViewVendas
     Height = 231
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 342
-    ExplicitWidth = 1195
     object PanelSelecionaProduto: TPanel
       Left = 1
       Top = 1
@@ -666,7 +662,6 @@ object FrmViewVendas: TFrmViewVendas
       Align = alClient
       TabOrder = 0
       Visible = False
-      ExplicitWidth = 1193
       object cxButton1: TcxButton
         Left = 1003
         Top = 80
@@ -719,11 +714,10 @@ object FrmViewVendas: TFrmViewVendas
       Height = 229
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 1193
       object Label1: TLabel
         Left = 0
         Top = 0
-        Width = 262
+        Width = 106
         Height = 16
         Caption = 'DADOS CLIENTES'
         Color = clGradientInactiveCaption
@@ -739,7 +733,7 @@ object FrmViewVendas: TFrmViewVendas
       object Label2: TLabel
         Left = 0
         Top = 176
-        Width = 262
+        Width = 106
         Height = 16
         Caption = 'DADOS CLIENTES'
         Color = clGradientInactiveCaption
@@ -755,7 +749,7 @@ object FrmViewVendas: TFrmViewVendas
       object Label3: TLabel
         Left = 0
         Top = 352
-        Width = 262
+        Width = 106
         Height = 16
         Caption = 'DADOS CLIENTES'
         Color = clGradientInactiveCaption
@@ -775,8 +769,6 @@ object FrmViewVendas: TFrmViewVendas
         Height = 227
         Style.GradientBeginColor = clGradientInactiveCaption
         TabOrder = 0
-        ExplicitLeft = 283
-        ExplicitWidth = 909
         object dxTileControl1Group1: TdxTileControlGroup
           Index = 0
         end

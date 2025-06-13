@@ -12,6 +12,7 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel2: TPanel
@@ -19,7 +20,7 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
     Top = 240
     Width = 1071
     Height = 517
-    Align = alBottom
+    Align = alClient
     TabOrder = 0
     object cxGrid1: TcxGrid
       Left = 1
@@ -33,31 +34,43 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
         DataController.DataModeController.DetailInSQLMode = True
         DataController.DataModeController.GridMode = True
         DataController.DataModeController.SmartRefresh = True
-        DataController.DataSource = DataSource1
+        DataController.DataSource = DS_Produtos
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
+        OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsView.CellAutoHeight = True
+        OptionsView.ColumnAutoWidth = True
         object cxGrid1DBTableView1CODIGO_PRODUTO: TcxGridDBColumn
           Caption = 'CODIGO'
           DataBinding.FieldName = 'CODIGO_PRODUTO'
           HeaderAlignmentHorz = taCenter
+          Options.Editing = False
+          Width = 30
         end
         object cxGrid1DBTableView1NOME_PRODUTO: TcxGridDBColumn
           Caption = 'NOME'
           DataBinding.FieldName = 'NOME_PRODUTO'
           HeaderAlignmentHorz = taCenter
+          Options.Editing = False
           Width = 200
         end
         object cxGrid1DBTableView1DESCRICAO_PRODUTO: TcxGridDBColumn
           Caption = 'DESCRICAO'
           DataBinding.FieldName = 'DESCRICAO_PRODUTO'
           HeaderAlignmentHorz = taCenter
+          Options.Editing = False
           Width = 200
         end
         object cxGrid1DBTableView1PRECO_PRODUTO: TcxGridDBColumn
           Caption = 'VALOR'
           DataBinding.FieldName = 'PRECO_PRODUTO'
           HeaderAlignmentHorz = taCenter
+          Options.Editing = False
         end
       end
       object cxGrid1Level1: TcxGridLevel
@@ -70,16 +83,15 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
     Top = 58
     Width = 1071
     Height = 182
-    Align = alClient
+    Align = alTop
     TabOrder = 1
     object dxLayoutControl1: TdxLayoutControl
       Left = 1
       Top = 1
       Width = 1069
-      Height = 179
+      Height = 180
       Align = alClient
       TabOrder = 0
-      ExplicitHeight = 196
       object cxValorProduto: TcxTextEdit
         Left = 83
         Top = 37
@@ -90,7 +102,7 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
         Style.HotTrack = False
         TabOrder = 1
         Height = 21
-        Width = 121
+        Width = 86
       end
       object cxDescricaoProduto: TcxTextEdit
         Left = 83
@@ -102,7 +114,7 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
         Style.HotTrack = False
         TabOrder = 2
         Height = 21
-        Width = 121
+        Width = 182
       end
       object cxNomeProduto: TcxTextEdit
         Left = 83
@@ -112,7 +124,7 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
         Style.BorderStyle = ebs3D
         Style.HotTrack = False
         TabOrder = 0
-        Width = 121
+        Width = 182
       end
       object dxLayoutControl1Group_Root: TdxLayoutGroup
         AlignHorz = ahLeft
@@ -120,25 +132,27 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
         ButtonOptions.Buttons = <>
         Enabled = False
         Hidden = True
-        ItemIndex = 1
+        ItemIndex = 2
         ShowBorder = False
         Index = -1
       end
       object dxLayoutItem1: TdxLayoutItem
         Parent = dxLayoutControl1Group_Root
+        AlignHorz = ahLeft
         CaptionOptions.Text = 'Valor'
         Control = cxValorProduto
         ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 121
+        ControlOptions.OriginalWidth = 86
         ControlOptions.ShowBorder = False
         Index = 1
       end
       object dxLayoutItem2: TdxLayoutItem
         Parent = dxLayoutControl1Group_Root
+        AlignHorz = ahLeft
         CaptionOptions.Text = 'Descricao'
         Control = cxDescricaoProduto
         ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 121
+        ControlOptions.OriginalWidth = 182
         ControlOptions.ShowBorder = False
         Index = 2
       end
@@ -149,7 +163,7 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
         CaptionOptions.Text = 'Nome Produto'
         Control = cxNomeProduto
         ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 121
+        ControlOptions.OriginalWidth = 182
         ControlOptions.ShowBorder = False
         Index = 0
       end
@@ -179,6 +193,8 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
       58
       0)
     object dxBarManager1Bar1: TdxBar
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
       Caption = 'Custom 1'
       CaptionButtons = <>
       DockedDockingStyle = dsTop
@@ -201,6 +217,10 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
         item
           Visible = True
           ItemName = 'dxBarLargeButtonExcluir'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButtonCancelar'
         end
         item
           Visible = True
@@ -497,63 +517,113 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
         922E1DC00C80B4A2BF1A008E74CE9609ECF5D73295C2AA6340C9FFB8CAC5FB17
         B024B60E1605DAAE0000000049454E44AE426082}
     end
-  end
-  object DSP_Produtos: TDataSetProvider
-    Options = [poAllowMultiRecordUpdates, poAutoRefresh, poUseQuoteChar]
-    Left = 705
-    Top = 131
-  end
-  object SQLDataSet1: TSQLDataSet
-    GetMetadata = False
-    ObjectView = True
-    DataSource = DataSource1
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = DataModuleConexao.Conn
-    Left = 521
-    Top = 123
-    object SQLDataSet1CODIGO_PRODUTO: TIntegerField
-      FieldName = 'CODIGO_PRODUTO'
-      Required = True
+    object dxBarButton2: TdxBarButton
+      Caption = 'Cancelar'
+      Category = 0
+      Hint = 'Cancelar'
+      Visible = ivAlways
+      Glyph.SourceDPI = 96
+      Glyph.Data = {
+        89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+        610000001974455874536F6674776172650041646F626520496D616765526561
+        647971C9653C00000011744558745469746C650050617573653B53746F703B3B
+        8A7A3C0000012249444154785EAD91C14AC4301086A7D68AE89328EC9BE81EF5
+        A6AFA04751F02D647D0341104FB23E8908227A12B6AE2D6B366B9B99D4FE2565
+        1743C8C51F063EBE0993494BFF996434DEBFB97E1C7EB4958FC6C35B3814180E
+        3D9C71DE4B7AF5B0D7E4FAA9992E9E1B309CF370E82DBDCB1AA067664BD9464A
+        2F933B02C3F53ECD127ACDEF97DE657DF509681AAB481A2170BF6AC07B1B101B
+        A1DA7E93888063DE1F604C7F1383C33E3C40A812859BC0111F1850B322B602F6
+        7CC53A32A01632A2A8D06F1DFBFE1D1CDB604E95D160CFB33038F21159135B03
+        8EF8D06FC4411170D4FB03D8DAE9E717CD94E978D5174549E5CCF940B283939D
+        B3A3F3C1E4F862501E9EEE5EC2A1C070E8E14CE75D923FDB6CB6B5ED846EEB07
+        E0FC96E3B9F3168D5F3C1F3F11AF0B16D00000000049454E44AE426082}
     end
-    object SQLDataSet1NOME_PRODUTO: TStringField
+    object dxBarLargeButtonCancelar: TdxBarLargeButton
+      Caption = 'Cancelar'
+      Category = 0
+      Hint = 'Cancelar'
+      Visible = ivAlways
+      Glyph.SourceDPI = 96
+      Glyph.Data = {
+        89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+        610000001974455874536F6674776172650041646F626520496D616765526561
+        647971C9653C00000011744558745469746C650050617573653B53746F703B3B
+        8A7A3C0000012249444154785EAD91C14AC4301086A7D68AE89328EC9BE81EF5
+        A6AFA04751F02D647D0341104FB23E8908227A12B6AE2D6B366B9B99D4FE2565
+        1743C8C51F063EBE0993494BFF996434DEBFB97E1C7EB4958FC6C35B3814180E
+        3D9C71DE4B7AF5B0D7E4FAA9992E9E1B309CF370E82DBDCB1AA067664BD9464A
+        2F933B02C3F53ECD127ACDEF97DE657DF509681AAB481A2170BF6AC07B1B101B
+        A1DA7E93888063DE1F604C7F1383C33E3C40A812859BC0111F1850B322B602F6
+        7CC53A32A01632A2A8D06F1DFBFE1D1CDB604E95D160CFB33038F21159135B03
+        8EF8D06FC4411170D4FB03D8DAE9E717CD94E978D5174549E5CCF940B283939D
+        B3A3F3C1E4F862501E9EEE5EC2A1C070E8E14CE75D923FDB6CB6B5ED846EEB07
+        E0FC96E3B9F3168D5F3C1F3F11AF0B16D00000000049454E44AE426082}
+      OnClick = dxBarLargeButtonCancelarClick
+      AutoGrayScale = False
+      HotGlyph.SourceDPI = 96
+      HotGlyph.Data = {
+        89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+        610000001974455874536F6674776172650041646F626520496D616765526561
+        647971C9653C00000011744558745469746C650050617573653B53746F703B3B
+        8A7A3C0000012249444154785EAD91C14AC4301086A7D68AE89328EC9BE81EF5
+        A6AFA04751F02D647D0341104FB23E8908227A12B6AE2D6B366B9B99D4FE2565
+        1743C8C51F063EBE0993494BFF996434DEBFB97E1C7EB4958FC6C35B3814180E
+        3D9C71DE4B7AF5B0D7E4FAA9992E9E1B309CF370E82DBDCB1AA067664BD9464A
+        2F933B02C3F53ECD127ACDEF97DE657DF509681AAB481A2170BF6AC07B1B101B
+        A1DA7E93888063DE1F604C7F1383C33E3C40A812859BC0111F1850B322B602F6
+        7CC53A32A01632A2A8D06F1DFBFE1D1CDB604E95D160CFB33038F21159135B03
+        8EF8D06FC4411170D4FB03D8DAE9E717CD94E978D5174549E5CCF940B283939D
+        B3A3F3C1E4F862501E9EEE5EC2A1C070E8E14CE75D923FDB6CB6B5ED846EEB07
+        E0FC96E3B9F3168D5F3C1F3F11AF0B16D00000000049454E44AE426082}
+    end
+  end
+  object CDS_Produtos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP_Produtos'
+    Left = 873
+    Top = 155
+    object CDS_ProdutosCODIGO_PRODUTO: TIntegerField
+      FieldName = 'CODIGO_PRODUTO'
+    end
+    object CDS_ProdutosNOME_PRODUTO: TStringField
       FieldName = 'NOME_PRODUTO'
-      Required = True
       Size = 400
     end
-    object SQLDataSet1DESCRICAO_PRODUTO: TStringField
+    object CDS_ProdutosDESCRICAO_PRODUTO: TStringField
       FieldName = 'DESCRICAO_PRODUTO'
       Size = 1020
     end
-    object SQLDataSet1PRECO_PRODUTO: TFMTBCDField
+    object CDS_ProdutosPRECO_PRODUTO: TFMTBCDField
       FieldName = 'PRECO_PRODUTO'
-      Required = True
+      currency = True
       Precision = 18
       Size = 2
     end
   end
-  object SQLQuery1: TSQLQuery
+  object SQL_Produtos: TSQLQuery
+    DataSource = DS_Produtos
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'select * from produto')
+      'select * from produto order by CODIGO_PRODUTO')
     SQLConnection = DataModuleConexao.Conn
-    Left = 713
-    Top = 75
-    object SQLQuery1CODIGO_PRODUTO: TIntegerField
+    Left = 793
+    Top = 155
+    object SQL_ProdutosCODIGO_PRODUTO: TIntegerField
       FieldName = 'CODIGO_PRODUTO'
       Required = True
     end
-    object SQLQuery1NOME_PRODUTO: TStringField
+    object SQL_ProdutosNOME_PRODUTO: TStringField
       FieldName = 'NOME_PRODUTO'
       Required = True
       Size = 400
     end
-    object SQLQuery1DESCRICAO_PRODUTO: TStringField
+    object SQL_ProdutosDESCRICAO_PRODUTO: TStringField
       FieldName = 'DESCRICAO_PRODUTO'
       Size = 1020
     end
-    object SQLQuery1PRECO_PRODUTO: TFMTBCDField
+    object SQL_ProdutosPRECO_PRODUTO: TFMTBCDField
       FieldName = 'PRECO_PRODUTO'
       Required = True
       DisplayFormat = '#,##0.00'
@@ -561,15 +631,15 @@ object FrmViewCadastroProduto: TFrmViewCadastroProduto
       Size = 2
     end
   end
-  object DataSource1: TDataSource
-    DataSet = SQLQuery1
+  object DSP_Produtos: TDataSetProvider
+    DataSet = SQL_Produtos
+    Options = [poAllowMultiRecordUpdates, poAutoRefresh, poUseQuoteChar]
+    Left = 697
+    Top = 155
+  end
+  object DS_Produtos: TDataSource
+    DataSet = CDS_Produtos
     Left = 600
     Top = 160
-  end
-  object CDS_Produtos: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 857
-    Top = 107
   end
 end

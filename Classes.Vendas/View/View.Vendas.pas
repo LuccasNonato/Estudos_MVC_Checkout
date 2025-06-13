@@ -121,12 +121,12 @@ type
     procedure dxTileControlFinalizarVendaClick(Sender: TdxTileControlItem);
     procedure cxCodigoProdutoExit(Sender: TObject);
     procedure cxAddItemClick(Sender: TObject);
-    procedure cxCodigoProdutoKeyPress(Sender: TObject; var Key: Char);
-    procedure cxValorUnitarioKeyPress(Sender: TObject; var Key: Char);
-    procedure cxQuantidadeKeyPress(Sender: TObject; var Key: Char);
     procedure cxCepExit(Sender: TObject);
     procedure dxTileControlBuscarItemClick(Sender: TdxTileControlItem);
+    procedure cxCodigoProdutoClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
+    procedure PularComEnter(Sender: TObject; var Key: Char);
     function RemoverCaracteresEspeciais(const Texto: string): string;
     procedure LimpaInfos;
     { Private declarations }
@@ -205,6 +205,14 @@ end;
 
 procedure TFrmViewVendas.cxCepExit(Sender: TObject);
 begin
+  if Trim(cxCep.Text) = '' then
+  begin
+    ShowMessage('Informe um cep válido.');
+    cxCep.SetFocus;
+    exit;
+  end;
+
+
   ACBrCEP1.BuscarPorCEP(cxCep.Text);
 
   if ACBrCEP1.Enderecos.Count > 0 then
@@ -262,6 +270,11 @@ begin
 end;
 
 
+procedure TFrmViewVendas.cxCodigoProdutoClick(Sender: TObject);
+begin
+  dxTileControlBuscarItemClick(nil);
+end;
+
 procedure TFrmViewVendas.cxCodigoProdutoExit(Sender: TObject);
 var
   Controller: iControllerCadastro;
@@ -280,8 +293,7 @@ begin
   cxQuantidade.SetFocus;
 end;
 
-procedure TFrmViewVendas.cxCodigoProdutoKeyPress(Sender: TObject;
-  var Key: Char);
+procedure TFrmViewVendas.PularComEnter(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
   begin
@@ -290,43 +302,29 @@ begin
   end;
 end;
 
-procedure TFrmViewVendas.cxQuantidadeKeyPress(Sender: TObject; var Key: Char);
-begin
- if Key = #13 then
- begin
-    Key := #0;
-    Perform(WM_NEXTDLGCTL, 0, 0);
- end;
-end;
-
-procedure TFrmViewVendas.cxValorUnitarioKeyPress(Sender: TObject;
-  var Key: Char);
-begin
- if Key = #13 then
- begin
-    Key := #0;
-    Perform(WM_NEXTDLGCTL, 0, 0);
- end;
-end;
-
 procedure TFrmViewVendas.dxTileControlBuscarItemClick(Sender: TdxTileControlItem);
 var
   frmViewCadastroProduto: TFrmViewCadastroProduto;
 begin
+
+  if dxLayoutControl1Group_Root.Enabled = False  then
+  begin
+     ShowMessage('Deve Iniciar a Venda Para Poder Buscar o Item!');
+     exit;
+  end;
+
   frmViewCadastroProduto := TFrmViewCadastroProduto.Create(Self);
   try
     frmViewCadastroProduto.dxBarLargeButtonEditar.Visible := ivNever;
     frmViewCadastroProduto.dxBarLargeButtonExcluir.Visible := ivNever;
     frmViewCadastroProduto.dxBarLargeButtonNovo.Visible := ivNever;
     frmViewCadastroProduto.dxBarLargeButtonSalvar.Visible := ivNever;
+    frmViewCadastroProduto.dxBarLargeButtonCancelar.Visible := ivNever;
     frmViewCadastroProduto.dxBarLargeButtonSelecionaItem.Visible := ivAlways;
-
-    Panel1.Visible := False;
-    Panel1.Enabled := False;
 
     if frmViewCadastroProduto.ShowModal = mrOk then
     begin
-      cxCodProduto.EditValue := frmViewCadastroProduto.ProdutoSelecionadoID;
+      cxCodigoProduto.EditValue := frmViewCadastroProduto.ProdutoSelecionadoID;
 
       cxCodigoProdutoExit(cxCodProduto);
     end;
@@ -341,6 +339,10 @@ procedure TFrmViewVendas.dxTileControlCancelarVendaClick(
 var
   MsgResult: Integer;
 begin
+  if dxLayoutControl1Group_Root.Enabled = False then
+     exit;
+
+
   MsgResult := MessageDlg('Tem certeza que deseja cancelar a venda?', mtConfirmation, [mbYes, mbNo], 0);
 
   if MsgResult = mrYes then
@@ -367,6 +369,48 @@ begin
      exit;
   end;
 
+  if Trim(cxCep.Text) = ''  then
+  begin
+    ShowMessage('Informe seu Cep para continuar!');
+    cxCep.SetFocus;
+    exit;
+  end;
+
+  if Trim(cxNomeCliente.Text) = '' then
+  begin
+    ShowMessage('Informe o nome do cliente para continuar!');
+    cxNomeCliente.SetFocus;
+    exit;
+  end;
+
+  if Trim(cxNumero.Text) = '' then
+  begin
+    ShowMessage('Informe o numero do cliente para continuar!');
+    cxNumero.SetFocus;
+    exit;
+  end;
+
+  if Trim(cxBairro.Text) = '' then
+  begin
+    ShowMessage('Informe o bairro do cliente para continuar!');
+    cxBairro.SetFocus;
+    exit;
+  end;
+
+  if Trim(cxEstado.Text) = '' then
+  begin
+    ShowMessage('Informe o nome do cliente para continuar!');
+    cxEstado.SetFocus;
+    exit;
+  end;
+
+  if Trim(cxCidade.Text) = '' then
+  begin
+    ShowMessage('Informe a cidade do cliente para continuar!');
+    cxCidade.SetFocus;
+    exit;
+  end;
+
   TCadastroVendas.New
                  .DadosVendas(TCadastroVendasModel.New
                                                   .DataVenda(now)
@@ -386,6 +430,21 @@ begin
   dxLayoutControl1Group_Root.Enabled := True;
   dxLayoutControl2Group_Root1.Enabled := True;
   cxCodigoProduto.SetFocus;
+end;
+
+procedure TFrmViewVendas.FormCreate(Sender: TObject);
+begin
+  cxNomeCliente.OnKeyPress := PularComEnter;
+  cxCep.OnKeyPress := PularComEnter;
+  cxBairro.OnKeyPress := PularComEnter;
+  cxNumero.OnKeyPress := PularComEnter;
+  cxCidade.OnKeyPress := PularComEnter;
+  cxEstado.OnKeyPress := PularComEnter;
+
+  cxValorUnitario.OnKeyPress := PularComEnter;
+  cxCodigoProduto.OnKeyPress := PularComEnter;
+  cxQuantidade.OnKeyPress := PularComEnter;
+
 end;
 
 end.

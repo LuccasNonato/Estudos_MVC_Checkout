@@ -11,10 +11,10 @@ uses
   cxGridLevel, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid, dxBar, Vcl.ExtCtrls, cxContainer,
   dxLayoutcxEditAdapters, cxTextEdit, sqlexpr, Data.FMTBcd, Datasnap.Provider,
-  cxMaskEdit, cxSpinEdit, cxDBEdit, Datasnap.DBClient;
+  cxMaskEdit, cxSpinEdit, cxDBEdit, Datasnap.DBClient, dxLayoutControlAdapters;
 
 type
-  TAcaoCadastro = (acNovo, acEditar);
+  TAcaoCadastro = (acNovo, acEditar, acCancel);
 
   TFrmViewCadastroProduto = class(TForm)
     Panel2: TPanel;
@@ -41,35 +41,39 @@ type
     cxGrid1DBTableView1: TcxGridDBTableView;
     cxGrid1Level1: TcxGridLevel;
     cxGrid1: TcxGrid;
-    DSP_Produtos: TDataSetProvider;
-    SQLDataSet1: TSQLDataSet;
-    SQLQuery1: TSQLQuery;
-    SQLQuery1CODIGO_PRODUTO: TIntegerField;
-    SQLQuery1NOME_PRODUTO: TStringField;
-    SQLQuery1DESCRICAO_PRODUTO: TStringField;
-    SQLQuery1PRECO_PRODUTO: TFMTBCDField;
-    SQLDataSet1CODIGO_PRODUTO: TIntegerField;
-    SQLDataSet1NOME_PRODUTO: TStringField;
-    SQLDataSet1DESCRICAO_PRODUTO: TStringField;
-    SQLDataSet1PRECO_PRODUTO: TFMTBCDField;
-    DataSource1: TDataSource;
     cxGrid1DBTableView1CODIGO_PRODUTO: TcxGridDBColumn;
     cxGrid1DBTableView1NOME_PRODUTO: TcxGridDBColumn;
     cxGrid1DBTableView1DESCRICAO_PRODUTO: TcxGridDBColumn;
     cxGrid1DBTableView1PRECO_PRODUTO: TcxGridDBColumn;
     dxBarLargeButtonSelecionaItem: TdxBarLargeButton;
     CDS_Produtos: TClientDataSet;
+    SQL_Produtos: TSQLQuery;
+    SQL_ProdutosCODIGO_PRODUTO: TIntegerField;
+    SQL_ProdutosNOME_PRODUTO: TStringField;
+    SQL_ProdutosDESCRICAO_PRODUTO: TStringField;
+    SQL_ProdutosPRECO_PRODUTO: TFMTBCDField;
+    DSP_Produtos: TDataSetProvider;
+    DS_Produtos: TDataSource;
+    CDS_ProdutosCODIGO_PRODUTO: TIntegerField;
+    CDS_ProdutosNOME_PRODUTO: TStringField;
+    CDS_ProdutosDESCRICAO_PRODUTO: TStringField;
+    CDS_ProdutosPRECO_PRODUTO: TFMTBCDField;
+    dxBarButton2: TdxBarButton;
+    dxBarLargeButtonCancelar: TdxBarLargeButton;
     procedure dxBarLargeButtonSalvarClick(Sender: TObject);
     procedure dxBarLargeButtonNovoClick(Sender: TObject);
     procedure dxBarLargeButtonEditarClick(Sender: TObject);
     procedure dxBarLargeButtonExcluirClick(Sender: TObject);
     procedure dxBarLargeButtonSelecionaItemClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure dxBarLargeButtonCancelarClick(Sender: TObject);
   private
       CodProduto : Integer;
       FAcao: TAcaoCadastro;
 
     procedure PegaCodProd;
     procedure LimpaCampos;
+    procedure EditarItems;
     { Private declarations }
   public
     ProdutoSelecionadoID: Integer;
@@ -98,12 +102,40 @@ begin
   cxValorProduto.EditValue := '';
 end;
 
+procedure TFrmViewCadastroProduto.EditarItems;
+begin
+  if FAcao = acEditar then
+  begin
+    cxNomeProduto.Text := CDS_ProdutosNOME_PRODUTO.AsString;
+    cxValorProduto.Text := CDS_ProdutosPRECO_PRODUTO.AsString;
+    cxDescricaoProduto.Text := CDS_ProdutosDESCRICAO_PRODUTO.AsString;
+  end
+  else
+  begin
+   cxNomeProduto.Text := '';
+   cxValorProduto.Text := '';
+   cxDescricaoProduto.Text := '';
+  end;
+end;
+
+procedure TFrmViewCadastroProduto.dxBarLargeButtonCancelarClick(
+  Sender: TObject);
+begin
+  FAcao := acCancel;
+  EditarItems;
+  dxBarLargeButtonEditar.Enabled := True;
+  dxBarLargeButtonExcluir.Enabled := True;
+  dxLayoutControl1Group_Root.Enabled := False;
+end;
+
 procedure TFrmViewCadastroProduto.dxBarLargeButtonEditarClick(Sender: TObject);
 begin
  FAcao := acEditar;
  dxLayoutControl1Group_Root.Enabled := True;
  dxBarLargeButtonEditar.Enabled := False;
  dxBarLargeButtonExcluir.Enabled := False;
+
+ EditarItems;
 end;
 
 procedure TFrmViewCadastroProduto.dxBarLargeButtonExcluirClick(Sender: TObject);
@@ -115,7 +147,7 @@ begin
         TCadastroProduto.New
           .CodigoProduto(CodProduto))
       .DeletarProduto;
-  SQLQuery1.Refresh;
+  CDS_Produtos.Refresh;
 end;
 
 procedure TFrmViewCadastroProduto.dxBarLargeButtonNovoClick(Sender: TObject);
@@ -128,6 +160,29 @@ end;
 
 procedure TFrmViewCadastroProduto.dxBarLargeButtonSalvarClick(Sender: TObject);
 begin
+
+  if Trim(cxNomeProduto.Text) = '' then
+  begin
+    ShowMessage('Digite um nome para o produto.');
+    cxNomeProduto.SetFocus;
+    Exit;
+  end;
+
+  if (cxValorProduto.Text = '') or (cxValorProduto.EditValue <= 0) then
+  begin
+    ShowMessage('Informe um valor para o produto.');
+    cxValorProduto.SetFocus;
+    Exit;
+  end;
+
+  if Trim(cxDescricaoProduto.Text) = '' then
+  begin
+    ShowMessage('Digite uma descrição para o produto.');
+    cxDescricaoProduto.SetFocus;
+    Exit;
+  end;
+
+
   case FAcao of
     acNovo:
     begin
@@ -156,7 +211,7 @@ begin
   LimpaCampos;
 
 
-  SQLQuery1.Refresh;
+  CDS_Produtos.Refresh;
   dxLayoutControl1Group_Root.Enabled := False;
   dxBarLargeButtonEditar.Enabled := True;
   dxBarLargeButtonExcluir.Enabled := True;
@@ -173,6 +228,11 @@ begin
   end
   else
     ShowMessage('Selecione um item da lista.');
+end;
+
+procedure TFrmViewCadastroProduto.FormShow(Sender: TObject);
+begin
+  CDS_Produtos.Open;
 end;
 
 end.

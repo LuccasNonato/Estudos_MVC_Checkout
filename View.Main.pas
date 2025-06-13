@@ -6,7 +6,9 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
-  dxCustomTileControl, cxClasses, dxTileControl;
+  dxCustomTileControl, cxClasses, dxTileControl, Vcl.StdCtrls, Vcl.Menus,
+  dxLayoutControlAdapters, dxLayoutContainer, cxButtons, dxLayoutControl,
+  dxLayoutcxEditAdapters, cxContainer, cxEdit, cxTextEdit;
 
 type
   TFrmViewMain = class(TForm)
@@ -17,6 +19,7 @@ type
     dxTileControl1Item1: TdxTileControlItem;
     procedure dxTileControlCadastroProdutoClick(Sender: TdxTileControlItem);
     procedure dxTileControlVenderClick(Sender: TdxTileControlItem);
+    procedure dxTileControl1Item1Click(Sender: TdxTileControlItem);
   private
     { Private declarations }
   public
@@ -29,9 +32,22 @@ var
 implementation
 
 uses
-  View.cadastro.produto, View.Vendas;
+  View.cadastro.produto, View.Vendas, View.relatorio, datamodule.conexao;
 
 {$R *.dfm}
+
+procedure TFrmViewMain.dxTileControl1Item1Click(Sender: TdxTileControlItem);
+var
+  frmRelatorio : TfrmRelatorio;
+begin
+  frmRelatorio := TfrmRelatorio.Create(Self);
+  try
+    frmRelatorio.ShowModal;
+  finally
+    frmRelatorio.Release;
+    frmRelatorio := nil;
+  end;
+end;
 
 procedure TFrmViewMain.dxTileControlCadastroProdutoClick(Sender: TdxTileControlItem);
 var
